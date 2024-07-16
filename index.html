@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -182,6 +182,17 @@
             }
         });
     });
+
+    const nome = document.getElementById('nome').value;
+    const idade = document.getElementById('idade').value;
+    const email = document.getElementById('email').value;
+    const telefone = document.getElementById('telefone').value;
+
+    const queryParams = `?nome=${encodeURIComponent(nome)}&idade=${encodeURIComponent(idade)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(telefone)}`;
+    const url = `agradecimento.html${queryParams}`;
+
+    window.location.href = url;
+
 </script>
 
 </body>
