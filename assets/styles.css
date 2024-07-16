@@ -179,7 +179,7 @@ input[type=text], input[type="email"]{
 .animated-item {
     opacity: 0;
     transform: translateX(50px); /* Inicialmente, deslocado para a direita */
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 2.6s ease, transform 2.6s ease;
 }
 
 .animated-item.show {

@@ -27,6 +27,9 @@
             padding: 20px;
             max-width: 600px;
             box-sizing: border-box;
+            opacity: 0; /* Começa invisível */
+            transform: translateX(50px); /* Começa deslocado para a direita */
+            transition: opacity 2.5s ease, transform 2.5s ease; /* Transição suave */
         }
         .titulo {
             font-weight: 700;
@@ -42,9 +45,23 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container animated">
         <h1 class="titulo">Obrigado pela sua Avaliação!🐾</h1>
         <p>Agradecemos pela confiança e por fazer parte da nossa história. Sua opinião é muito importante para nós e nos ajuda a melhorar continuamente nossos produtos e serviços.</p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const animatedItems = document.querySelectorAll('.animated');
+            
+            // Adicionar classe 'show' para cada item animado após um pequeno atraso
+            animatedItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, index * 300); // Ajuste o intervalo de atraso conforme necessário
+            });
+        });
+    </script>
 </body>
 </html>
