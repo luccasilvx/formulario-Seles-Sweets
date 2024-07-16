@@ -11,11 +11,11 @@
 <body>
     
 <section class="container-box">
-    <div class="container-titulo">
+    <div class="container-titulo animated-item">
         <h1 class="titulo">
             Bem-vindo(a) ao Formulário de Avaliação da Sele's Sweet<span class="docinho">🍩</span>s!
         </h1>
-        <a>Estamos felizes por você estar aqui. Na Sele's Sweets, nossa maior alegria é proporcionar momentos doces e inesquecíveis para nossos clientes. Sua opinião é muito importante para nós e nos ajuda a melhorar continuamente nossos produtos e serviços.
+        <a class="animated-item">Estamos felizes por você estar aqui. Na Sele's Sweets, nossa maior alegria é proporcionar momentos doces e inesquecíveis para nossos clientes. Sua opinião é muito importante para nós e nos ajuda a melhorar continuamente nossos produtos e serviços.
 
             Por favor, dedique alguns minutos para compartilhar sua experiência conosco. Sua colaboração é essencial para que possamos continuar adoçando sua vida da melhor maneira possível.
             
@@ -23,7 +23,7 @@
         </a>
     </div>
 
-    <form id="avaliacaoForm" action="agradecimento.html" method="GET">
+    <form id="avaliacaoForm" action="agradecimento.html" method="GET" class="animated-item">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
         <br>
@@ -153,46 +153,56 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('avaliacaoForm');
+        
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-            // Redirecionar para a página de agradecimento
-            window.location.href = form.getAttribute('action');
+
+            // Obter os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const idade = document.getElementById('idade').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+
+            // Construir a query string
+            const queryParams = `?nome=${encodeURIComponent(nome)}&idade=${encodeURIComponent(idade)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(telefone)}`;
+            
+            // Redirecionar para a página de agradecimento com os parâmetros
+            window.location.href = `${form.getAttribute('action')}${queryParams}`;
         });
 
-    const addProdutoButton = document.getElementById('addProdutoButton');
-    const produtosAdquiridosInput = document.getElementById('produtosAdquiridos');
-    const produtosList = document.getElementById('produtosList');
-    addProdutoButton.addEventListener('click', function () {
-    const produtoValue = produtosAdquiridosInput.value.trim();
+        const addProdutoButton = document.getElementById('addProdutoButton');
+        const produtosAdquiridosInput = document.getElementById('produtosAdquiridos');
+        const produtosList = document.getElementById('produtosList');
 
-    if (produtoValue) {
-        const li = document.createElement('li');
-        li.textContent = produtoValue;
-        const removeButton = document.createElement('span');
-        removeButton.textContent = 'X';
-        removeButton.classList.add('remove-button');
+        addProdutoButton.addEventListener('click', function () {
+            const produtoValue = produtosAdquiridosInput.value.trim();
 
-        removeButton.addEventListener('click', function () {
-            produtosList.removeChild(li);
-        });
+            if (produtoValue) {
+                const li = document.createElement('li');
+                li.textContent = produtoValue;
+                const removeButton = document.createElement('span');
+                removeButton.textContent = 'X';
+                removeButton.classList.add('remove-button');
 
-        li.appendChild(removeButton);
-        produtosList.appendChild(li);
-        produtosAdquiridosInput.value = '';
+                removeButton.addEventListener('click', function () {
+                    produtosList.removeChild(li);
+                });
+
+                li.appendChild(removeButton);
+                produtosList.appendChild(li);
+                produtosAdquiridosInput.value = '';
             }
         });
+
+        const animatedItems = document.querySelectorAll('.animated-item');
+        
+        // Adicionar classe 'show' para cada item animado após um pequeno atraso
+        animatedItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('show');
+            }, index * 200); // Ajuste o intervalo de atraso conforme necessário
+        });
     });
-
-    const nome = document.getElementById('nome').value;
-    const idade = document.getElementById('idade').value;
-    const email = document.getElementById('email').value;
-    const telefone = document.getElementById('telefone').value;
-
-    const queryParams = `?nome=${encodeURIComponent(nome)}&idade=${encodeURIComponent(idade)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(telefone)}`;
-    const url = `agradecimento.html${queryParams}`;
-
-    window.location.href = url;
-
 </script>
 
 </body>

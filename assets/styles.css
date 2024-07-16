@@ -176,6 +176,17 @@ input[type=text], input[type="email"]{
     background-color: #f2f2f2;
 }
 
+.animated-item {
+    opacity: 0;
+    transform: translateX(50px); /* Inicialmente, deslocado para a direita */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animated-item.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 @media (max-width: 600px) {
     .container-box {
         padding: 20px; 
