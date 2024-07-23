@@ -15,10 +15,8 @@
         <h1 class="titulo">
             Bem-vindo(a) ao Formulário de Avaliação da Sele's Sweet<span class="docinho">🍩</span>s!
         </h1>
-        <a class="animated-item">Estamos felizes por você estar aqui. Na Sele's Sweets, nossa maior alegria é proporcionar momentos doces e inesquecíveis para nossos clientes. Sua opinião é muito importante para nós e nos ajuda a melhorar continuamente nossos produtos e serviços.
-
-            Por favor, dedique alguns minutos para compartilhar sua experiência conosco. Sua colaboração é essencial para que possamos continuar adoçando sua vida da melhor maneira possível.
-            
+        <a class="animated-item">
+            Estamos felizes por você estar aqui. Na Sele's Sweets, nossa maior alegria é proporcionar momentos doces e inesquecíveis para nossos clientes. Sua opinião é muito importante para nós e nos ajuda a melhorar continuamente nossos produtos e serviços.
             Agradecemos pela confiança e por fazer parte da nossa história!
         </a>
     </div>
@@ -81,7 +79,7 @@
         <ul id="produtosList"></ul>
         <br>
 
-        <label for="sabor">Sabor:</label>
+        <label for="sabor">Sabor e Qualidade:</label>
         <div class="rating">
             <input type="radio" id="sabor1" name="sabor" value="1" required>1
             <input type="radio" id="sabor2" name="sabor" value="2">2
@@ -116,10 +114,6 @@
             <input type="radio" id="entrega4" name="entrega" value="4">4
             <input type="radio" id="entrega5" name="entrega" value="5">5
         </div>
-        
-        
-        <label for="satisfacaoGeral">Satisfação geral ou sugestão sobre nós:</label>
-        <input type="text" id="satisfacaoGeral" name="satisfacaoGeral" required>
         <br>
         
         <label for="gostar">O que você mais gostou?</label>
@@ -151,56 +145,68 @@
 </section>
 
 <script>
+    // ouvinte de evento que dispara quando o DOM está completamente carregado
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('avaliacaoForm');
         
+        // ouvinte de evento para o envio do formulário
         form.addEventListener('submit', function (event) {
+            // Prevê comportamento padrão do formulário (não recarrega a página)
             event.preventDefault();
 
-            // Obter os valores dos campos
             const nome = document.getElementById('nome').value;
             const idade = document.getElementById('idade').value;
             const email = document.getElementById('email').value;
             const telefone = document.getElementById('telefone').value;
 
-            // Construir a query string
+            //Constrói a query string com os valores dos campos, codificados para URL
             const queryParams = `?nome=${encodeURIComponent(nome)}&idade=${encodeURIComponent(idade)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(telefone)}`;
             
-            // Redirecionar para a página de agradecimento com os parâmetros
+            // Redirecionar para a página de agradecimento com os parâmetros na URL
             window.location.href = `${form.getAttribute('action')}${queryParams}`;
         });
 
+        // Obtém os elementos do botão de adicionar produto, input de produtos adquiridos e lista de produtos
         const addProdutoButton = document.getElementById('addProdutoButton');
         const produtosAdquiridosInput = document.getElementById('produtosAdquiridos');
         const produtosList = document.getElementById('produtosList');
 
+        // ouvinte de evento ao botão de adicionar produto
         addProdutoButton.addEventListener('click', function () {
             const produtoValue = produtosAdquiridosInput.value.trim();
 
             if (produtoValue) {
+                // cria novo elemento de lista e define seu conteúdo como o valor do produto
                 const li = document.createElement('li');
                 li.textContent = produtoValue;
+
+                // cria botão de remoção e define seu conteúdo como 'X'
                 const removeButton = document.createElement('span');
                 removeButton.textContent = 'X';
                 removeButton.classList.add('remove-button');
 
+                // ouvinte de evento ao botão de remoção para remover o item da lista
                 removeButton.addEventListener('click', function () {
                     produtosList.removeChild(li);
                 });
 
+                // adiciona botão de remoção ao item da lista e o item da lista à lista de produtos
                 li.appendChild(removeButton);
                 produtosList.appendChild(li);
+
+                // limpa o valor do input de produtos adquiridos
                 produtosAdquiridosInput.value = '';
             }
         });
 
+        // obtém todos elementos com classe 'animated-item'
         const animatedItems = document.querySelectorAll('.animated-item');
         
-        // Adicionar classe 'show' para cada item animado após um pequeno atraso
+        // adiciona classe 'show' para cada item animado após pequeno atraso
         animatedItems.forEach((item, index) => {
             setTimeout(() => {
                 item.classList.add('show');
-            }, index * 300); // Ajuste o intervalo de atraso conforme necessário
+            }, index * 300); // ajusta o intervalo de atraso
         });
     });
 </script>
