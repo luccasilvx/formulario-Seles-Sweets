@@ -186,6 +186,17 @@ input[type=text], input[type="email"]{
     opacity: 1;
     transform: translateX(0);
 }
+.rodape{
+    background-color: #cac0c0;
+    
+}
+.link_rodape{
+    opacity: 1;
+    transform: translateX(50px); /* Inicialmente, deslocado para a direita */
+    transition: opacity 2.6s ease, transform 2.6s ease;
+    text-decoration: none;
+    color: #000000;
+}
 
 @media (max-width: 600px) {
     .container-box {
